@@ -2,8 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:flutter_clock_helper/customizer.dart';
 import 'package:flutter_clock_helper/model.dart';
@@ -43,6 +45,8 @@ class BezierTest extends StatelessWidget {
       body: Center(
         child: HourMinuteFace(
           size: 390,
+          handsColor: Colors.black87,
+          strokeWidth: 10,
         ),
       ),
     );
@@ -56,7 +60,7 @@ class HourMinuteFace extends StatefulWidget {
 
   const HourMinuteFace({
     this.size: 100,
-    this.handsColor: Colors.black87,
+    this.handsColor: Colors.black54,
     this.strokeWidth: 10,
   });
 
@@ -71,6 +75,7 @@ class _HourMinuteFaceState extends State<HourMinuteFace> {
       child: CustomPaint(
         painter: HourMinuteHandPainter(
           strokeWidth: widget.strokeWidth,
+          strokeColor: widget.handsColor,
           hourHandLength: .18,
           minuteHandLength: .38,
         ),
@@ -80,160 +85,75 @@ class _HourMinuteFaceState extends State<HourMinuteFace> {
   }
 }
 
+/// Paints a single fluid path connecting a minute and hour hand in the center of a circular clock face. 
+/// 
+/// [hourHandLength] and [minuteHandLength] are values between 0 and .5, and correlate to percent diameter of the clock face.
 class HourMinuteHandPainter extends CustomPainter {
+  static const degreesPerMinute = 6;
+  static const degreesPerHour = 30;
+
   final double strokeWidth;
+  final Color strokeColor;
   final double hourHandLength;
   final double minuteHandLength;
 
   const HourMinuteHandPainter({
     @required this.strokeWidth,
+    @required this.strokeColor,
     @required this.hourHandLength,
     @required this.minuteHandLength,
-  })  : assert(hourHandLength > 0 && hourHandLength < 1),
-        assert(minuteHandLength > 0 && minuteHandLength < 1);
+  })  : assert(hourHandLength >= 0 && hourHandLength <= .5),
+        assert(minuteHandLength >= 0 && minuteHandLength <= .5);
 
   @override
   void paint(Canvas canvas, Size size) {
-    Path path = Path();
-    Paint paint = Paint()
+    final _hour = 5;
+    final _minute = 49;
+
+    final double hourHandX = radialCoordinateX(
+      distanceFromCenter: hourHandLength,
+      angle: _hour * degreesPerHour,
+    );
+    final double hourHandY = radialCoordinateY(
+      distanceFromCenter: hourHandLength,
+      angle: _hour * degreesPerHour,
+    );
+    final double minuteHandX = radialCoordinateX(
+      distanceFromCenter: minuteHandLength,
+      angle: _minute * degreesPerMinute,
+    );
+    final double minuteHandY = radialCoordinateY(
+      distanceFromCenter: minuteHandLength,
+      angle: _minute * degreesPerMinute,
+    );
+
+    final Paint paint = Paint()
       ..strokeWidth = strokeWidth
+      ..color = strokeColor
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
-    final double radiansPerHour = 30 * math.pi / 180;
-    final double radiansPerMin = 6 * math.pi / 180;
+    Path path = Path()
+      ..moveTo(
+        hourHandX,
+        hourHandY,
+      )
+      ..conicTo(
+        .5,
+        .5,
+        minuteHandX,
+        minuteHandY,
+        3,
+      );
 
-    // all coordinates from top left
-    double hourX(int hour) {
-      switch (hour) {
-        case 0:
-        case 6:
-          return .5;
-        case 3:
-          return .5 + hourHandLength;
-        case 9:
-          return .5 - hourHandLength;
-      }
+    final Matrix4 scaleMatrix = Matrix4.identity()
+      ..scale(size.width, size.height);
 
-      final angle = radiansPerHour * (hour % 3);
-
-      double angleModifier;
-      if (hour < 3)
-        angleModifier = math.sin(angle);
-      else if (hour < 6)
-        angleModifier = math.cos(angle);
-      else if (hour < 9)
-        angleModifier = math.sin(angle);
-      else
-        angleModifier = math.cos(angle);
-
-      return .5 +
-          hourHandLength * angleModifier * (hour < 6 && hour > 0 ? 1 : -1);
-    }
-
-    double hourY(int hour) {
-      switch (hour) {
-        case 3:
-        case 9:
-          return .5;
-        case 0:
-          return .5 - hourHandLength;
-        case 6:
-          return .5 + hourHandLength;
-      }
-
-      final angle = radiansPerHour * (hour % 3);
-
-      double angleModifier;
-      if (hour < 3)
-        angleModifier = math.cos(angle);
-      else if (hour < 6)
-        angleModifier = math.sin(angle);
-      else if (hour < 9)
-        angleModifier = math.cos(angle);
-      else
-        angleModifier = math.sin(angle);
-
-      return .5 +
-          hourHandLength * angleModifier * (hour < 9 && hour > 3 ? 1 : -1);
-    }
-
-    double minuteX(int minute) {
-      switch (minute) {
-        case 0:
-        case 30:
-          return .5;
-        case 15:
-          return .5 + minuteHandLength;
-        case 45:
-          return .5 - minuteHandLength;
-      }
-
-      final angle = radiansPerMin * (minute % 15);
-
-      double angleModifier;
-      if (minute < 15)
-        angleModifier = math.sin(angle);
-      else if (minute < 30)
-        angleModifier = math.cos(angle);
-      else if (minute < 45)
-        angleModifier = math.sin(angle);
-      else
-        angleModifier = math.cos(angle);
-
-      return .5 +
-          minuteHandLength *
-              angleModifier *
-              (minute < 30 && minute > 0 ? 1 : -1);
-    }
-
-    double minuteY(int minute) {
-      switch (minute) {
-        case 15:
-        case 45:
-          return .5;
-        case 0:
-          return .5 - minuteHandLength;
-        case 30:
-          return .5 + minuteHandLength;
-      }
-
-      final angle = radiansPerMin * (minute % 15);
-
-      double angleModifier;
-      if (minute < 15)
-        angleModifier = math.cos(angle);
-      else if (minute < 30)
-        angleModifier = math.sin(angle);
-      else if (minute < 45)
-        angleModifier = math.cos(angle);
-      else
-        angleModifier = math.sin(angle);
-
-      return .5 +
-          minuteHandLength *
-              angleModifier *
-              (minute < 45 && minute > 15 ? 1 : -1);
-    }
-
-    final _hour = 11;
-    final _minute = 5;
-
-    // draw path from hour hand terminal
-    path.conicTo(
-      size.width * (.5 - hourX(_hour)),
-      size.height * (.5 - hourY(_hour)),
-      size.width * (minuteX(_minute) - hourX(_hour)),
-      size.height * (minuteY(_minute) - hourY(_hour)),
-      3,
+    path = path.transform(
+      Float64List.fromList(
+        scaleMatrix.storage.toList(),
+      ),
     );
-
-    // center path in clock face by adjusting fromqath starting point
-    path = path.shift(
-      Offset(hourX(_hour) * size.width, hourY(_hour) * size.height),
-    );
-
-    paint.color = Colors.black87;
 
     canvas.drawPath(path, paint);
   }
@@ -242,4 +162,72 @@ class HourMinuteHandPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return oldDelegate != this;
   }
+}
+
+/// Returns a value between -1 and 1
+double radialCoordinateY({double distanceFromCenter, int angle}) {
+  switch (angle) {
+    case 90:
+    case 270:
+      return .5;
+    case 0:
+      return .5 - distanceFromCenter;
+    case 180:
+      return .5 + distanceFromCenter;
+  }
+
+  final radians = (angle % 90) * math.pi / 180;
+
+  double angleModifier;
+
+  if (angle < 90)
+    angleModifier = math.cos(radians);
+  else if (angle < 180)
+    angleModifier = math.sin(radians);
+  else if (angle < 270)
+    angleModifier = math.cos(radians);
+  else
+    angleModifier = math.sin(radians);
+
+  return .5 +
+      (distanceFromCenter * angleModifier) *
+          (angle < 270 && angle > 90 ? 1 : -1);
+}
+
+/// Returns a value between -1 and 1
+double radialCoordinateX({double distanceFromCenter, int angle}) {
+  switch (angle) {
+    case 0:
+    case 180:
+      return .5;
+    case 270:
+      return .5 - distanceFromCenter;
+    case 90:
+      return .5 + distanceFromCenter;
+  }
+
+  final radians = (angle % 90) * math.pi / 180;
+
+  double angleModifier;
+
+  if (angle < 90)
+    angleModifier = math.sin(radians);
+  else if (angle < 180)
+    angleModifier = math.cos(radians);
+  else if (angle < 270)
+    angleModifier = math.sin(radians);
+  else
+    angleModifier = math.cos(radians);
+
+  return .5 +
+      (distanceFromCenter * angleModifier) *
+          (angle < 180 && angle > 0 ? 1 : -1);
+}
+
+int degreesPerMinute(int minutes) {
+  return minutes * 6;
+}
+
+int degreesPerHour(int hours) {
+  return hours * 30;
 }

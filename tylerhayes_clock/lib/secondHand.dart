@@ -19,10 +19,21 @@ class SecondHand extends StatefulWidget {
 }
 
 class _SecondHandState extends State<SecondHand> {
+  Timer _timer;
+
   @override
   void initState() {
-    Timer.periodic(Duration(milliseconds: 1), (time) => setState(() {}));
+    _timer = Timer.periodic(
+      Duration(milliseconds: 1),
+      (time) => setState(() {}),
+    );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override

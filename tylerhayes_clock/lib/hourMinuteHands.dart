@@ -21,10 +21,21 @@ class HourMinuteHands extends StatefulWidget {
 }
 
 class _HourMinuteHandsState extends State<HourMinuteHands> {
+  Timer _timer;
+
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 1), (time) => setState(() {}));
+    _timer = Timer.periodic(
+      Duration(seconds: 1),
+      (time) => setState(() {}),
+    );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override

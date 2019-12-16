@@ -4,22 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:tylerhayes_clock/tools.dart';
 
 class HourMinuteHands extends StatefulWidget {
-  final double clockFaceSize;
   final double hourHandLength;
   final double minuteHandLength;
   final Color handsColor;
   final double strokeWidth;
 
   const HourMinuteHands({
-    @required this.clockFaceSize,
     @required this.hourHandLength,
     @required this.minuteHandLength,
     this.handsColor: Colors.black54,
     this.strokeWidth: 10,
-  })  : assert(hourHandLength < clockFaceSize / 2,
-            "hourHandLength can't be longer than clock face radius. Currently overflowing by ${hourHandLength - clockFaceSize / 2} units."),
-        assert(minuteHandLength < clockFaceSize / 2,
-            "minuteHandLength can't be longer than clock face radius. Currently overflowing by ${minuteHandLength - clockFaceSize / 2} units.");
+  });
 
   @override
   _HourMinuteHandsState createState() => _HourMinuteHandsState();
@@ -45,6 +40,8 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
 
   @override
   Widget build(BuildContext context) {
+    final size = widget.hourHandLength + widget.strokeWidth / 2;
+
     return Container(
       child: CustomPaint(
         painter: _HourMinuteHandPainter(
@@ -53,7 +50,7 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
           hourHandLength: widget.hourHandLength,
           minuteHandLength: widget.minuteHandLength,
         ),
-        size: Size(widget.clockFaceSize, widget.clockFaceSize),
+        size: Size(size, size),
       ),
     );
   }

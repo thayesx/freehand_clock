@@ -6,19 +6,14 @@ import 'package:flutter/material.dart';
 /// [distanceFromCenter] is a value between 0 and 0.5 that correlates to a percentage of the clockFace diameter.
 class SecondHand extends StatefulWidget {
   final double distanceFromCenter;
-  final double clockFaceSize;
   final Color handsColor;
   final double strokeWidth;
 
   const SecondHand({
     this.distanceFromCenter,
-    this.clockFaceSize,
     this.handsColor: Colors.black54,
     this.strokeWidth: 10,
-  }) : assert(
-          distanceFromCenter <= clockFaceSize / 2,
-          "Second hand must not extend beyond the clock face. Currently overflowing by ${distanceFromCenter - clockFaceSize / 2} units.",
-        );
+  });
 
   @override
   _SecondHandState createState() => _SecondHandState();
@@ -44,6 +39,8 @@ class _SecondHandState extends State<SecondHand> {
 
   @override
   Widget build(BuildContext context) {
+    final size = widget.distanceFromCenter + widget.strokeWidth;
+    
     return Container(
       child: CustomPaint(
         painter: _SecondHandPainter(
@@ -51,7 +48,7 @@ class _SecondHandState extends State<SecondHand> {
           strokeColor: widget.handsColor,
           distanceFromCenter: widget.distanceFromCenter,
         ),
-        size: Size(widget.clockFaceSize, widget.clockFaceSize),
+        size: Size(size, size),
       ),
     );
   }

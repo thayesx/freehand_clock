@@ -1,26 +1,27 @@
 
 import 'dart:async';
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:tylerhayes_clock/tools.dart';
 
-class HourMinuteFace extends StatefulWidget {
+class HourMinuteHands extends StatefulWidget {
   final double size;
   final Color handsColor;
   final double strokeWidth;
 
-  const HourMinuteFace({
+  const HourMinuteHands({
     this.size: 100,
     this.handsColor: Colors.black54,
     this.strokeWidth: 10,
   });
 
   @override
-  _HourMinuteFaceState createState() => _HourMinuteFaceState();
+  _HourMinuteHandsState createState() => _HourMinuteHandsState();
 }
 
-class _HourMinuteFaceState extends State<HourMinuteFace> {
+class _HourMinuteHandsState extends State<HourMinuteHands> {
   @override
   void initState() {
     Timer.periodic(Duration(seconds: 1), (time) => setState(() {}));

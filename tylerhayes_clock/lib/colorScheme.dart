@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 ColorScheme darkScheme = ColorScheme.dark().copyWith(
   background: Colors.black87,
-  primary: Colors.white54,
-  secondary: Colors.red,
+  primary: Colors.white60,
+  secondary: Colors.white60,
 );
 
 ColorScheme lightScheme = ColorScheme.light().copyWith(
   background: Colors.white,
   primary: Colors.black87,
-  secondary: Colors.redAccent,
+  secondary: Colors.black87,
 );
 
 ColorScheme getThemeForContext(BuildContext context) {

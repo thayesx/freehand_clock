@@ -1,20 +1,25 @@
 import 'dart:async';
-import 'dart:developer';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:tylerhayes_clock/tools.dart';
 
 class HourMinuteHands extends StatefulWidget {
-  final double size;
+  final double clockFaceSize;
+  final double hourHandLength;
+  final double minuteHandLength;
   final Color handsColor;
   final double strokeWidth;
 
   const HourMinuteHands({
-    this.size: 100,
+    @required this.clockFaceSize,
+    @required this.hourHandLength,
+    @required this.minuteHandLength,
     this.handsColor: Colors.black54,
     this.strokeWidth: 10,
-  });
+  })  : assert(hourHandLength < clockFaceSize / 2,
+            "hourHandLength can't be longer than clock face radius. Currently overflowing by ${hourHandLength - clockFaceSize / 2} units."),
+        assert(minuteHandLength < clockFaceSize / 2,
+            "minuteHandLength can't be longer than clock face radius. Currently overflowing by ${minuteHandLength - clockFaceSize / 2} units.");
 
   @override
   _HourMinuteHandsState createState() => _HourMinuteHandsState();
@@ -42,22 +47,20 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
   Widget build(BuildContext context) {
     return Container(
       child: CustomPaint(
-        painter: HourMinuteHandPainter(
+        painter: _HourMinuteHandPainter(
           strokeWidth: widget.strokeWidth,
           strokeColor: widget.handsColor,
-          hourHandLength: .18,
-          minuteHandLength: .38,
+          hourHandLength: widget.hourHandLength,
+          minuteHandLength: widget.minuteHandLength,
         ),
-        size: Size(widget.size, widget.size),
+        size: Size(widget.clockFaceSize, widget.clockFaceSize),
       ),
     );
   }
 }
 
 /// Paints a single fluid path connecting a minute and hour hand in the center of a circular clock face.
-///
-/// [hourHandLength] and [minuteHandLength] are values between 0 and .5, and correlate to percent diameter of the clock face.
-class HourMinuteHandPainter extends CustomPainter {
+class _HourMinuteHandPainter extends CustomPainter {
   static const degreesPerMinute = 6;
   static const degreesPerHour = 30;
 
@@ -66,13 +69,12 @@ class HourMinuteHandPainter extends CustomPainter {
   final double hourHandLength;
   final double minuteHandLength;
 
-  const HourMinuteHandPainter({
+  const _HourMinuteHandPainter({
     @required this.strokeWidth,
     @required this.strokeColor,
     @required this.hourHandLength,
     @required this.minuteHandLength,
-  })  : assert(hourHandLength >= 0 && hourHandLength <= .5),
-        assert(minuteHandLength >= 0 && minuteHandLength <= .5);
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -82,18 +84,22 @@ class HourMinuteHandPainter extends CustomPainter {
     final double hourHandX = radialCoordinateX(
       distanceFromCenter: hourHandLength,
       angle: hour * degreesPerHour,
+      gridWidth: size.width,
     );
     final double hourHandY = radialCoordinateY(
       distanceFromCenter: hourHandLength,
       angle: hour * degreesPerHour,
+      gridHeight: size.height,
     );
     final double minuteHandX = radialCoordinateX(
       distanceFromCenter: minuteHandLength,
       angle: minute * degreesPerMinute,
+      gridWidth: size.width,
     );
     final double minuteHandY = radialCoordinateY(
       distanceFromCenter: minuteHandLength,
       angle: minute * degreesPerMinute,
+      gridHeight: size.height,
     );
 
     final Paint paint = Paint()
@@ -108,21 +114,12 @@ class HourMinuteHandPainter extends CustomPainter {
         hourHandY,
       )
       ..conicTo(
-        .5,
-        .5,
+        size.width / 2,
+        size.height / 2,
         minuteHandX,
         minuteHandY,
         3,
       );
-
-    final Matrix4 scaleMatrix = Matrix4.identity()
-      ..scale(size.width, size.height);
-
-    path = path.transform(
-      Float64List.fromList(
-        scaleMatrix.storage.toList(),
-      ),
-    );
 
     canvas.drawPath(path, paint);
   }

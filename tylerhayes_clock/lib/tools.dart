@@ -1,15 +1,19 @@
 import 'dart:math';
 
 /// Returns a value between -1 and 1
-double radialCoordinateY({double distanceFromCenter, num angle}) {
+double radialCoordinateY({
+  double distanceFromCenter,
+  num angle,
+  num gridHeight,
+}) {
   switch (angle) {
     case 90:
     case 270:
-      return .5;
+      return gridHeight / 2;
     case 0:
-      return .5 - distanceFromCenter;
+      return gridHeight / 2 - distanceFromCenter;
     case 180:
-      return .5 + distanceFromCenter;
+      return gridHeight / 2 + distanceFromCenter;
   }
 
   final radians = (angle % 90) * pi / 180;
@@ -25,21 +29,25 @@ double radialCoordinateY({double distanceFromCenter, num angle}) {
   else
     angleModifier = sin(radians);
 
-  return .5 +
+  return gridHeight / 2 +
       (distanceFromCenter * angleModifier) *
           (angle < 270 && angle > 90 ? 1 : -1);
 }
 
 /// Returns a value between -1 and 1
-double radialCoordinateX({double distanceFromCenter, num angle}) {
+double radialCoordinateX({
+  double distanceFromCenter,
+  num angle,
+  num gridWidth: 1,
+}) {
   switch (angle) {
     case 0:
     case 180:
-      return .5;
+      return gridWidth / 2;
     case 270:
-      return .5 - distanceFromCenter;
+      return gridWidth / 2 - distanceFromCenter;
     case 90:
-      return .5 + distanceFromCenter;
+      return gridWidth / 2 + distanceFromCenter;
   }
 
   final radians = (angle % 90) * pi / 180;
@@ -55,7 +63,7 @@ double radialCoordinateX({double distanceFromCenter, num angle}) {
   else
     angleModifier = cos(radians);
 
-  return .5 +
+  return gridWidth / 2 +
       (distanceFromCenter * angleModifier) *
           (angle < 180 && angle > 0 ? 1 : -1);
 }

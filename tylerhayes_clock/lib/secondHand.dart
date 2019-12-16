@@ -3,16 +3,22 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// [distanceFromCenter] is a value between 0 and 0.5 that correlates to a percentage of the clockFace diameter.
 class SecondHand extends StatefulWidget {
-  final double size;
+  final double distanceFromCenter;
+  final double clockFaceSize;
   final Color handsColor;
   final double strokeWidth;
 
   const SecondHand({
-    this.size: 100,
+    this.distanceFromCenter,
+    this.clockFaceSize,
     this.handsColor: Colors.black54,
     this.strokeWidth: 10,
-  });
+  }) : assert(
+          distanceFromCenter <= clockFaceSize / 2,
+          "Second hand must not extend beyond the clock face. Currently overflowing by ${distanceFromCenter - clockFaceSize / 2} units.",
+        );
 
   @override
   _SecondHandState createState() => _SecondHandState();
@@ -40,25 +46,29 @@ class _SecondHandState extends State<SecondHand> {
   Widget build(BuildContext context) {
     return Container(
       child: CustomPaint(
-        painter: SecondHandPainter(
+        painter: _SecondHandPainter(
           strokeWidth: widget.strokeWidth,
           strokeColor: widget.handsColor,
+          distanceFromCenter: widget.distanceFromCenter,
         ),
-        size: Size(widget.size, widget.size),
+        size: Size(widget.clockFaceSize, widget.clockFaceSize),
       ),
     );
   }
 }
 
-class SecondHandPainter extends CustomPainter {
+/// Paints a second hand as a circle of [strokeWidth] diameter that orbits a circle with [distanceFromCenter] radius.
+class _SecondHandPainter extends CustomPainter {
   static const degreesPerSecond = 6;
 
   final double strokeWidth;
   final Color strokeColor;
+  final double distanceFromCenter;
 
-  const SecondHandPainter({
+  const _SecondHandPainter({
     @required this.strokeWidth,
     @required this.strokeColor,
+    @required this.distanceFromCenter,
   });
 
   @override
@@ -76,7 +86,7 @@ class SecondHandPainter extends CustomPainter {
     canvas.drawArc(
       Rect.fromCircle(
         center: Offset(size.width / 2, size.width / 2),
-        radius: size.width / 2 - 20,
+        radius: distanceFromCenter,
       ),
       drawAngleRadians,
       .001,

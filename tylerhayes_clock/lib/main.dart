@@ -8,8 +8,7 @@ import 'package:flutter_clock_helper/customizer.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/hourMinuteHands.dart';
-import 'package:tylerhayes_clock/secondHand.dart';
+import 'package:tylerhayes_clock/tylerHayesClock.dart';
 
 void main() {
   // A temporary measure until Platform supports web and TargetPlatform supports
@@ -30,36 +29,6 @@ void main() {
   //
   // Your job is to edit [AnalogClock], or replace it with your own clock
   // widget. (Look in analog_clock.dart for more details!)
-  runApp(ClockCustomizer((ClockModel model) => TylerHayesClock(model)));
+  runApp(ClockCustomizer((ClockModel model) => TylerHayesClock()));
 }
 
-class TylerHayesClock extends StatelessWidget {
-  static const double clockFaceDiameter = 390;
-  static const double strokeWidth = 10;
-
-  final ClockModel model;
-
-  TylerHayesClock(this.model);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Stack(
-          children: <Widget>[
-            HourMinuteHands(
-              size: clockFaceDiameter,
-              strokeWidth: strokeWidth,
-              handsColor: Colors.black87,
-            ),
-            SecondHand(
-              size: clockFaceDiameter,
-              strokeWidth: strokeWidth,
-              handsColor: Colors.black87,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}

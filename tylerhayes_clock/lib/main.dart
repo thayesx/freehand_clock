@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
@@ -70,6 +71,12 @@ class HourMinuteFace extends StatefulWidget {
 
 class _HourMinuteFaceState extends State<HourMinuteFace> {
   @override
+  void initState() {
+    Timer.periodic(Duration(seconds: 1), (time) => setState(() {}));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: CustomPaint(
@@ -85,8 +92,8 @@ class _HourMinuteFaceState extends State<HourMinuteFace> {
   }
 }
 
-/// Paints a single fluid path connecting a minute and hour hand in the center of a circular clock face. 
-/// 
+/// Paints a single fluid path connecting a minute and hour hand in the center of a circular clock face.
+///
 /// [hourHandLength] and [minuteHandLength] are values between 0 and .5, and correlate to percent diameter of the clock face.
 class HourMinuteHandPainter extends CustomPainter {
   static const degreesPerMinute = 6;
@@ -107,24 +114,24 @@ class HourMinuteHandPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final _hour = 5;
-    final _minute = 49;
+    final double hour = DateTime.now().hour % 12 + DateTime.now().minute / 60;
+    final double minute = DateTime.now().minute + DateTime.now().second / 60;
 
     final double hourHandX = radialCoordinateX(
       distanceFromCenter: hourHandLength,
-      angle: _hour * degreesPerHour,
+      angle: hour * degreesPerHour,
     );
     final double hourHandY = radialCoordinateY(
       distanceFromCenter: hourHandLength,
-      angle: _hour * degreesPerHour,
+      angle: hour * degreesPerHour,
     );
     final double minuteHandX = radialCoordinateX(
       distanceFromCenter: minuteHandLength,
-      angle: _minute * degreesPerMinute,
+      angle: minute * degreesPerMinute,
     );
     final double minuteHandY = radialCoordinateY(
       distanceFromCenter: minuteHandLength,
-      angle: _minute * degreesPerMinute,
+      angle: minute * degreesPerMinute,
     );
 
     final Paint paint = Paint()
@@ -165,7 +172,7 @@ class HourMinuteHandPainter extends CustomPainter {
 }
 
 /// Returns a value between -1 and 1
-double radialCoordinateY({double distanceFromCenter, int angle}) {
+double radialCoordinateY({double distanceFromCenter, num angle}) {
   switch (angle) {
     case 90:
     case 270:
@@ -195,7 +202,7 @@ double radialCoordinateY({double distanceFromCenter, int angle}) {
 }
 
 /// Returns a value between -1 and 1
-double radialCoordinateX({double distanceFromCenter, int angle}) {
+double radialCoordinateX({double distanceFromCenter, num angle}) {
   switch (angle) {
     case 0:
     case 180:

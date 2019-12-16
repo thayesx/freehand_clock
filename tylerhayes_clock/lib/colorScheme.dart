@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
 
-ColorScheme darkScheme = ColorScheme.dark().copyWith(
-  background: Colors.black87,
-  primary: Colors.white60,
-  secondary: Colors.white60,
-);
-
-ColorScheme lightScheme = ColorScheme.light().copyWith(
-  background: Colors.white,
-  primary: Colors.black87,
-  secondary: Colors.black87,
-);
-
-ColorScheme getThemeForContext(BuildContext context) {
-  switch (Theme.of(context).brightness) {
+Color handColor(BuildContext context) {
+  final ThemeData theme = Theme.of(context);
+  switch (theme.brightness) {
     case Brightness.dark:
-      return darkScheme;
+      return Colors.white70;
     case Brightness.light:
     default:
-      return lightScheme;
+      return theme.primaryColor;
   }
 }

@@ -4,17 +4,17 @@ import 'package:tylerhayes_clock/hourMinuteHands.dart';
 import 'package:tylerhayes_clock/secondHand.dart';
 
 class TylerHayesClock extends StatelessWidget {
-  static const double hourHandLength = 80;
-  static const double minuteHandLength = 145;
-  static const double secondHandLength = 165;
-  static const double strokeWidth = 10;
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = getThemeForContext(context);
+    final double screenSize = MediaQuery.of(context).size.shortestSide;
+
+    final double strokeWidth = 10;
+    final double secondHandLength = (screenSize / 2) - 30;
+    final double minuteHandLength = secondHandLength - strokeWidth * 2;
+    final double hourHandLength = minuteHandLength * .55;
 
     return Scaffold(
-      backgroundColor: colorScheme.background,
       body: Center(
         child: Stack(
           alignment: AlignmentDirectional.center,
@@ -23,12 +23,12 @@ class TylerHayesClock extends StatelessWidget {
               hourHandLength: hourHandLength,
               minuteHandLength: minuteHandLength,
               strokeWidth: strokeWidth,
-              handsColor: colorScheme.primary,
+              handsColor: handColor(context),
             ),
             SecondHand(
-              strokeWidth: strokeWidth,
-              handsColor: colorScheme.secondary,
               distanceFromCenter: secondHandLength,
+              strokeWidth: strokeWidth,
+              handColor: handColor(context),
             )
           ],
         ),

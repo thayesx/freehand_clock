@@ -9,8 +9,8 @@ class TylerHayesClock extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenSize = MediaQuery.of(context).size.shortestSide;
 
-    final double strokeWidth = 10;
-    final double secondHandLength = (screenSize / 2) - 30;
+    final double strokeWidth = screenSize / 40;
+    final double secondHandLength = (screenSize / 2) - screenSize * .1;
     final double minuteHandLength = secondHandLength - strokeWidth * 2;
     final double hourHandLength = minuteHandLength * .55;
 

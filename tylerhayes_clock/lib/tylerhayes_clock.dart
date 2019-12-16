@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/colorScheme.dart';
-import 'package:tylerhayes_clock/hourMinuteHands.dart';
-import 'package:tylerhayes_clock/secondHand.dart';
+import 'package:tylerhayes_clock/color_scheme.dart';
+import 'package:tylerhayes_clock/hour_minute_hands.dart';
+import 'package:tylerhayes_clock/second_hand.dart';
 
 class TylerHayesClock extends StatelessWidget {
 

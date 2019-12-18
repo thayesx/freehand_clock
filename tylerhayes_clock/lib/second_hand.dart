@@ -25,7 +25,7 @@ class _SecondHandState extends State<SecondHand> {
   @override
   void initState() {
     _timer = Timer.periodic(
-      Duration(milliseconds: 1),
+      Duration(milliseconds: 10),
       (time) => setState(() {}),
     );
     super.initState();

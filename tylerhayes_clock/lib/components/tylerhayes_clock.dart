@@ -23,14 +23,14 @@ class TylerHayesClock extends StatelessWidget {
           children: <Widget>[
             ClockFaceRing(
               radius: clockFaceSize,
-              color: Colors.white.withOpacity(.2),
               dotSize: strokeWidth / 2,
+              color: Colors.white.withOpacity(.2),
             ),
             HourMinuteHands(
               hourHandLength: hourHandLength,
               minuteHandLength: minuteHandLength,
               strokeWidth: strokeWidth,
-              handsColor: Colors.white.withOpacity(.8),
+              color: Colors.white.withOpacity(.8),
             ),
             SecondHand(
               radius: secondHandLength,

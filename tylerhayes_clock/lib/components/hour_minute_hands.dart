@@ -7,13 +7,13 @@ import 'package:tylerhayes_clock/utils/tools.dart';
 class HourMinuteHands extends StatefulWidget {
   final double hourHandLength;
   final double minuteHandLength;
-  final Color handsColor;
+  final Color color;
   final double strokeWidth;
 
   const HourMinuteHands({
     @required this.hourHandLength,
     @required this.minuteHandLength,
-    this.handsColor: Colors.black54,
+    this.color,
     this.strokeWidth: 10,
   });
 
@@ -47,7 +47,7 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
       child: CustomPaint(
         painter: _HourMinuteHandPainter(
           strokeWidth: widget.strokeWidth,
-          strokeColor: widget.handsColor,
+          strokeColor: widget.color,
           hourHandLength: widget.hourHandLength,
           minuteHandLength: widget.minuteHandLength,
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/arc_dot_painter.dart';
+import 'package:tylerhayes_clock/components/arc_dot_painter.dart';
 
 class ClockFaceRing extends StatelessWidget {
   final double radius;

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/constants.dart';
-import 'package:tylerhayes_clock/tools.dart';
+import 'package:tylerhayes_clock/utils/constants.dart';
+import 'package:tylerhayes_clock/utils/tools.dart';
 
 class HourMinuteHands extends StatefulWidget {
   final double hourHandLength;

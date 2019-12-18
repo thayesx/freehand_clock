@@ -45,14 +45,12 @@ class _SecondHandState extends State<SecondHand> {
 
     final secondHandAngle = seconds * degreesPerSecond;
 
-    return Container(
-      child: CustomPaint(
-        painter: ArcDotPainter(
-          arcAngles: [secondHandAngle],
-          dotSize: widget.dotSize,
-          color: widget.color,
-          radius: widget.radius,
-        ),
+    return CustomPaint(
+      painter: ArcDotPainter(
+        arcAngles: [secondHandAngle],
+        dotSize: widget.dotSize,
+        color: widget.color,
+        radius: widget.radius,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:tylerhayes_clock/constants.dart';
 import 'package:tylerhayes_clock/tools.dart';
 
 class HourMinuteHands extends StatefulWidget {
@@ -58,9 +59,6 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
 
 /// Paints a single fluid path connecting a minute and hour hand in the center of a circular clock face.
 class _HourMinuteHandPainter extends CustomPainter {
-  static const degreesPerMinute = 6;
-  static const degreesPerHour = 30;
-
   final double strokeWidth;
   final Color strokeColor;
   final double hourHandLength;

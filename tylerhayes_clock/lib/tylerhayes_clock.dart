@@ -33,9 +33,9 @@ class TylerHayesClock extends StatelessWidget {
               handsColor: Colors.white.withOpacity(.8),
             ),
             SecondHand(
-              distanceFromCenter: secondHandLength,
-              strokeWidth: strokeWidth,
-              handColor: Colors.white.withOpacity(.8),
+              radius: secondHandLength,
+              dotSize: strokeWidth,
+              color: Colors.white.withOpacity(.8),
             ),
           ],
         ),

@@ -29,8 +29,5 @@ void main() {
   //
   // Your job is to edit [AnalogClock], or replace it with your own clock
   // widget. (Look in analog_clock.dart for more details!)
-  runApp(MaterialApp(
-    home: TylerHayesClock(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(ClockCustomizer((model) => TylerHayesClock(model)));
 }

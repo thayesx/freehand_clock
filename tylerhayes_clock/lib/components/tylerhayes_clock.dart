@@ -1,45 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/components/clock_face_ring.dart';
-import 'package:tylerhayes_clock/components/hour_minute_hands.dart';
-import 'package:tylerhayes_clock/components/second_hand.dart';
+import 'package:flutter_clock_helper/model.dart';
+import 'package:tylerhayes_clock/components/clock_body.dart';
+import 'package:tylerhayes_clock/components/temperature_display.dart';
+import 'package:tylerhayes_clock/components/weather_condition_display.dart';
 
 class TylerHayesClock extends StatelessWidget {
+  final ClockModel model;
+
+  TylerHayesClock(this.model);
+
   @override
   Widget build(BuildContext context) {
-    final double screenSize = MediaQuery.of(context).size.shortestSide;
-
-    final double strokeWidth = screenSize / 40;
-    final double clockFaceSize = (screenSize / 2) - screenSize * .12;
-    // final double secondHandLength = clockFaceSize - strokeWidth * 3;
-    final double secondHandLength = clockFaceSize;
-    final double minuteHandLength = secondHandLength - strokeWidth * 3;
-    final double hourHandLength = minuteHandLength * .55;
-
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: <Widget>[
-            ClockFaceRing(
-              radius: clockFaceSize,
-              dotSize: strokeWidth * .65,
-              color: Colors.white.withOpacity(.2),
-            ),
-            HourMinuteHands(
-              hourHandLength: hourHandLength,
-              minuteHandLength: minuteHandLength,
-              strokeWidth: strokeWidth,
-              curveHardness: 2.8,
+      body: Stack(
+        children: <Widget>[
+          ClockBody(),
+          WeatherDisplay(
+            temperatureUnit: model.unit,
+            temperature: model.temperature,
+            weatherCondition: model.weatherCondition,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class WeatherDisplay extends StatelessWidget {
+  final TemperatureUnit temperatureUnit;
+  final double temperature;
+  final WeatherCondition weatherCondition;
+
+  WeatherDisplay({
+    this.temperatureUnit,
+    this.temperature,
+    this.weatherCondition,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 25,
+      left: 25,
+      child: Column(
+        children: [
+          TemperatureDisplay(
+            temperature: temperature.round(),
+            unit: temperatureUnit,
+            color: Colors.white.withOpacity(.8),
+            height: 20,
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            height: 20,
+            child: WeatherConditionDisplay(
+              weatherCondition: weatherCondition,
               color: Colors.white.withOpacity(.8),
             ),
-            SecondHand(
-              radius: secondHandLength,
-              dotSize: strokeWidth,
-              color: Colors.white.withOpacity(.8),
-            ),
-          ],
-        ),
+          )
+        ],
+        crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );
   }

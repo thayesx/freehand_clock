@@ -1,0 +1,44 @@
+const String _path = 'assets/';
+
+const String cloudy = '${_path}cloudy.svg';
+const String foggy = '${_path}foggy.svg';
+const String rainy = '${_path}rainy.svg';
+const String snowy = '${_path}snowy.svg';
+const String stormy = '${_path}stormy.svg';
+const String sunny = '${_path}sunny.svg';
+const String windy = '${_path}windy.svg';
+
+const String degrees = '${_path}degrees.svg';
+const String c = '${_path}c.svg';
+const String f = '${_path}f.svg';
+
+const String zero_0 = '${_path}zero_0.svg';
+const String zero_1 = '${_path}zero_1.svg';
+const String zero_2 = '${_path}zero_2.svg';
+const String one_0 = '${_path}one_0.svg';
+const String one_1 = '${_path}one_1.svg';
+const String one_2 = '${_path}one_2.svg';
+const String two_0 = '${_path}two_0.svg';
+const String two_1 = '${_path}two_1.svg';
+const String two_2 = '${_path}two_2.svg';
+const String three_0 = '${_path}three_0.svg';
+const String three_1 = '${_path}three_1.svg';
+const String three_2 = '${_path}three_2.svg';
+const String four_0 = '${_path}four_0.svg';
+const String four_1 = '${_path}four_1.svg';
+const String four_2 = '${_path}four_2.svg';
+const String five_0 = '${_path}five_0.svg';
+const String five_1 = '${_path}five_1.svg';
+const String five_2 = '${_path}five_2.svg';
+const String six_0 = '${_path}six_0.svg';
+const String six_1 = '${_path}six_1.svg';
+const String six_2 = '${_path}six_2.svg';
+const String seven_0 = '${_path}seven_0.svg';
+const String seven_1 = '${_path}seven_1.svg';
+const String seven_2 = '${_path}seven_2.svg';
+const String eight_0 = '${_path}eight_0.svg';
+const String eight_1 = '${_path}eight_1.svg';
+const String eight_2 = '${_path}eight_2.svg';
+const String nine_0 = '${_path}nine_0.svg';
+const String nine_1 = '${_path}nine_1.svg';
+const String nine_2 = '${_path}nine_2.svg';

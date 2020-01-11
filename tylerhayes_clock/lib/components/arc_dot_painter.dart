@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:tylerhayes_clock/utils/tools.dart';
 
 /// For every angle value in [arcAngles], ArcDotPainter paints a dot of color [color] and size [dotSize] along a circle with radius [radius].
 class ArcDotPainter extends CustomPainter {
@@ -27,14 +26,12 @@ class ArcDotPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     for (num angle in arcAngles) {
-      final angleInRadians = (angle - 90) * (pi / 180);
-
       canvas.drawArc(
         Rect.fromCircle(
           center: Offset(size.width / 2, size.width / 2),
           radius: radius,
         ),
-        angleInRadians,
+        radiansFromAngle(angle - 90),
         .001,
         false,
         paint,

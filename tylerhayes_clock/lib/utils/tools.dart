@@ -1,6 +1,6 @@
 import 'dart:math';
 
-/// Returns a value between -[gridWidth] and [gridWidth]
+/// Returns a value between 0 and [gridHeight] for the y coordinate value of the terminus of a line starting at (y = [gridHeight / 2]), with a length of [distanceFromCenter] and angle of [angle]
 double radialCoordinateY({
   double distanceFromCenter,
   num angle,
@@ -16,25 +16,25 @@ double radialCoordinateY({
       return gridHeight / 2 + distanceFromCenter;
   }
 
-  final radians = (angle % 90) * pi / 180;
+  final radians = radiansFromAngle(angle % 90);
 
-  double angleModifier;
+  double multiplier;
 
   if (angle < 90)
-    angleModifier = cos(radians);
+    multiplier = cos(radians);
   else if (angle < 180)
-    angleModifier = sin(radians);
+    multiplier = sin(radians);
   else if (angle < 270)
-    angleModifier = cos(radians);
+    multiplier = cos(radians);
   else
-    angleModifier = sin(radians);
+    multiplier = sin(radians);
 
   return gridHeight / 2 +
-      (distanceFromCenter * angleModifier) *
+      (distanceFromCenter * multiplier) *
           (angle < 270 && angle > 90 ? 1 : -1);
 }
 
-/// Returns a value between -[gridWidth] and [gridWidth]
+/// Returns a value between 0 and [gridWidth] for the x coordinate value of the terminus of a line starting at (x = [gridWidth / 2]), with a length of [distanceFromCenter] and angle of [angle]
 double radialCoordinateX({
   double distanceFromCenter,
   num angle,
@@ -50,29 +50,24 @@ double radialCoordinateX({
       return gridWidth / 2 + distanceFromCenter;
   }
 
-  final radians = (angle % 90) * pi / 180;
+  final radians = radiansFromAngle(angle % 90);
 
-  double angleModifier;
+  double multiplier;
 
   if (angle < 90)
-    angleModifier = sin(radians);
+    multiplier = sin(radians);
   else if (angle < 180)
-    angleModifier = cos(radians);
+    multiplier = cos(radians);
   else if (angle < 270)
-    angleModifier = sin(radians);
+    multiplier = sin(radians);
   else
-    angleModifier = cos(radians);
+    multiplier = cos(radians);
 
   return gridWidth / 2 +
-      (distanceFromCenter * angleModifier) *
+      (distanceFromCenter * multiplier) *
           (angle < 180 && angle > 0 ? 1 : -1);
 }
 
-void addNextAlt<T>(List<T> destination, List<T> source) {
-  destination.add(
-    source.firstWhere(
-      (elem) => !destination.contains(elem),
-      orElse: () => source[Random().nextInt(source.length)],
-    ),
-  );
+num radiansFromAngle(num angle) {
+  return angle * pi / 180;
 }

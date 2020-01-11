@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:tylerhayes_clock/components/weather/temperature_display.dart';
-import 'package:tylerhayes_clock/components/weather/weather_condition_display.dart';
+import 'package:tylerhayes_clock/components/weather/weather_condition.dart';
 
 class WeatherDisplay extends StatelessWidget {
   final TemperatureUnit temperatureUnit;

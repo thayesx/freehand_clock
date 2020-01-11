@@ -40,27 +40,32 @@ class WeatherDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = 25;
+
+    final double size = 40;
+
     return Positioned(
-      bottom: 25,
-      left: 25,
-      child: Column(
+      bottom: margin,
+      left: margin,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TemperatureDisplay(
-            temperature: temperature.round(),
-            unit: temperatureUnit,
-            color: Colors.white.withOpacity(.8),
-            height: 20,
-          ),
           Container(
-            margin: EdgeInsets.only(top: 10),
-            height: 20,
+            margin: EdgeInsets.only(right: margin / 2),
+            height: size,
+            width: size,
             child: WeatherConditionDisplay(
               weatherCondition: weatherCondition,
               color: Colors.white.withOpacity(.8),
             ),
-          )
+          ),
+          TemperatureDisplay(
+            temperature: temperature.round(),
+            unit: temperatureUnit,
+            color: Colors.white.withOpacity(.8),
+            size: size,
+          ),
         ],
-        crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );
   }

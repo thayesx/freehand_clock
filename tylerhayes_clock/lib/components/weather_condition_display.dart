@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tylerhayes_clock/svg/assets.dart' as assets;
 
 class WeatherConditionDisplay extends StatelessWidget {
   final WeatherCondition weatherCondition;
@@ -16,29 +15,30 @@ class WeatherConditionDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       _assetForWeatherCondition(weatherCondition),
-      alignment: Alignment.centerLeft,
       color: color,
     );
   }
 }
 
 String _assetForWeatherCondition(WeatherCondition condition) {
+  final _path = 'assets/';
+
   switch (condition) {
     case WeatherCondition.cloudy:
-      return assets.cloudy;
+      return '${_path}cloudy.svg';
     case WeatherCondition.foggy:
-      return assets.foggy;
+      return '${_path}foggy.svg';
     case WeatherCondition.rainy:
-      return assets.rainy;
+      return '${_path}rainy.svg';
     case WeatherCondition.snowy:
-      return assets.snowy;
+      return '${_path}snowy.svg';
     case WeatherCondition.sunny:
-      return assets.sunny;
+      return '${_path}sunny.svg';
     case WeatherCondition.windy:
-      return assets.windy;
+      return '${_path}windy.svg';
     case WeatherCondition.thunderstorm:
-      return assets.stormy;
-    default:
-      return null;
+      return '${_path}stormy.svg';
   }
+
+  return null;
 }

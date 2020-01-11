@@ -1,7 +1,5 @@
 import 'dart:math';
 
-import 'package:tylerhayes_clock/svg/letters.dart' as letterGroups;
-
 /// Returns a value between -[gridWidth] and [gridWidth]
 double radialCoordinateY({
   double distanceFromCenter,
@@ -77,38 +75,4 @@ void addNextAlt<T>(List<T> destination, List<T> source) {
       orElse: () => source[Random().nextInt(source.length)],
     ),
   );
-}
-
-/// Returns a list of number assets using alternates to avoid having two sequential, identical assets
-List<String> chainedAssetsFromNum(num number) {
-  List<String> assets = [];
-
-  number.toString().codeUnits.forEach(
-    (charCode) {
-      switch (new String.fromCharCode(charCode)) {
-        case "0":
-          return addNextAlt(assets, letterGroups.zeroes);
-        case "1":
-          return addNextAlt(assets, letterGroups.ones);
-        case "2":
-          return addNextAlt(assets, letterGroups.twos);
-        case "3":
-          return addNextAlt(assets, letterGroups.threes);
-        case "4":
-          return addNextAlt(assets, letterGroups.fours);
-        case "5":
-          return addNextAlt(assets, letterGroups.fives);
-        case "6":
-          return addNextAlt(assets, letterGroups.sixes);
-        case "7":
-          return addNextAlt(assets, letterGroups.sevens);
-        case "8":
-          return addNextAlt(assets, letterGroups.eights);
-        case "9":
-          return addNextAlt(assets, letterGroups.nines);
-      }
-    },
-  );
-
-  return assets;
 }

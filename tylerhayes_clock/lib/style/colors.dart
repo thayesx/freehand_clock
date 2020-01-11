@@ -33,7 +33,7 @@ Color backgroundColor(BuildContext context) {
     case Brightness.dark:
       return Colors.black;
     case Brightness.light:
-      return Colors.white.withOpacity(.1);
+      return Colors.white.withOpacity(.9);
   }
 
   return null;

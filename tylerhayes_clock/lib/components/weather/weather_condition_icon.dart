@@ -2,20 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class WeatherConditionDisplay extends StatelessWidget {
+class WeatherConditionIcon extends StatelessWidget {
   final WeatherCondition weatherCondition;
   final Color color;
+  final double size;
 
-  WeatherConditionDisplay({
+  WeatherConditionIcon({
     @required this.weatherCondition,
     this.color,
+    this.size,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      _assetForWeatherCondition(weatherCondition),
-      color: color,
+    return Container(
+      width: size,
+      height: size,
+      child: SvgPicture.asset(
+        _assetForWeatherCondition(weatherCondition),
+        color: color,
+      ),
     );
   }
 }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 
-class TemperatureDisplay extends StatelessWidget {
+class TemperatureText extends StatelessWidget {
   final int temperature;
   final TemperatureUnit unit;
   final Color color;
   final double size;
 
-  TemperatureDisplay({
+  TemperatureText({
     @required this.temperature,
     @required this.unit,
     this.color,

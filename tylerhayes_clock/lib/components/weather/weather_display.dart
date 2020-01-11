@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
-import 'package:tylerhayes_clock/components/weather/temperature_display.dart';
-import 'package:tylerhayes_clock/components/weather/weather_condition.dart';
-import 'package:tylerhayes_clock/style/color_scheme.dart';
+import 'package:tylerhayes_clock/components/weather/temperature_text.dart';
+import 'package:tylerhayes_clock/components/weather/weather_condition_icon.dart';
+import 'package:tylerhayes_clock/style/colors.dart';
 
 class WeatherDisplay extends StatelessWidget {
   final TemperatureUnit temperatureUnit;
@@ -18,8 +18,7 @@ class WeatherDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double margin = 20;
-
-    final double size = 45;
+    final double size = 40;
 
     return Positioned(
       bottom: margin,
@@ -29,14 +28,13 @@ class WeatherDisplay extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(right: margin / 2),
-            height: size,
-            width: size,
-            child: WeatherConditionDisplay(
+            child: WeatherConditionIcon(
               weatherCondition: weatherCondition,
               color: secondaryColor(context),
+              size: size,
             ),
           ),
-          TemperatureDisplay(
+          TemperatureText(
             temperature: temperature.round(),
             unit: temperatureUnit,
             color: secondaryColor(context),

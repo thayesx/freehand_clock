@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/components/clock/clock_face_ring.dart';
-import 'package:tylerhayes_clock/components/clock/hour_minute_hands.dart';
-import 'package:tylerhayes_clock/components/clock/second_hand.dart';
+
+import 'shared/hour_minute_hands.dart';
+import 'shared/clock_face_ring.dart';
+import 'shared/second_hand.dart';
 
 class ClockBody extends StatelessWidget {
   final double radius;

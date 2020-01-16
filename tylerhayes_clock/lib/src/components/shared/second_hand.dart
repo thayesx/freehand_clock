@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/components/painters/arc_dot_painter.dart';
-import 'package:tylerhayes_clock/utils/constants.dart';
+import 'package:tylerhayes_clock/src/utils/constants.dart';
+
+import 'painters/arc_dot_painter.dart';
 
 /// Paints a dot of color [color] and size [dotSize] that orbits a circle with radius [radius].
 class SecondHand extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/utils/tools.dart';
+import 'package:tylerhayes_clock/src/utils/tools.dart';
 
 /// For every angle value in [arcAngles], ArcDotPainter paints a dot of color [color] and size [dotSize] at a corresponding point on the border of a circle with radius [radius].
 class ArcDotPainter extends CustomPainter {

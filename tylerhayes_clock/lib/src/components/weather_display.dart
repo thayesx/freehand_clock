@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
-import 'package:tylerhayes_clock/components/weather/temperature_text.dart';
-import 'package:tylerhayes_clock/components/weather/weather_condition_icon.dart';
+
+import 'shared/temperature_text.dart';
+import 'shared/weather_condition_icon.dart';
 
 /// Displays an icon for [weatherCondition] next to the [temperature].
 class WeatherDisplay extends StatelessWidget {

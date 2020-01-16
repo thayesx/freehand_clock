@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/components/painters/curved_angle_painter.dart';
-import 'package:tylerhayes_clock/utils/constants.dart';
+import 'package:tylerhayes_clock/src/utils/constants.dart';
+
+import 'painters/curved_angle_painter.dart';
 
 /// Paints minute and hour hands from a single curved stroke of color [color] and width [strokeWidth].
 /// [curveHardness] determines the roundedness of the joint connecting both hands. A higher number corresponds to a harder angle.
@@ -31,7 +32,8 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
   @override
   void initState() {
     _timer = Timer.periodic(
-      Duration(seconds: 1),
+      // Duration(seconds: 1),
+      Duration(milliseconds: 50),
       (_) => setState(() {}),
     );
     super.initState();

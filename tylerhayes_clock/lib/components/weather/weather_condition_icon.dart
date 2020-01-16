@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// Displays an SVG icon for [weatherCondition] at size [size] and color [color]
 class WeatherConditionIcon extends StatelessWidget {
   final WeatherCondition weatherCondition;
   final Color color;

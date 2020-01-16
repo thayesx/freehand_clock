@@ -22,7 +22,7 @@ class CurvedAnglePainter extends CustomPainter {
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, Size _) {
     final double segment1X = radialCoordinateX(
       distanceFromCenter: segment1Length,
       angle: segment1Angle,

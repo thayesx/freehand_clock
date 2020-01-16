@@ -16,7 +16,7 @@ class ArcDotPainter extends CustomPainter {
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, Size _) {
     final Paint paint = Paint()
       ..strokeWidth = dotSize
       ..color = color
@@ -26,7 +26,7 @@ class ArcDotPainter extends CustomPainter {
     for (num angle in arcAngles) {
       canvas.drawArc(
         Rect.fromCircle(
-          center: Offset(size.width / 2, size.width / 2),
+          center: Offset(0, 0),
           radius: radius,
         ),
         radiansFromAngle(angle - 90),

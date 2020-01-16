@@ -4,7 +4,7 @@ import 'package:flutter_clock_helper/model.dart';
 import 'shared/temperature_text.dart';
 import 'shared/weather_condition_icon.dart';
 
-/// Displays an icon for [weatherCondition] next to the [temperature].
+/// Displays an icon for `weatherCondition` next to the `temperature`.
 class WeatherDisplay extends StatelessWidget {
   final double temperature;
   final WeatherCondition weatherCondition;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'painters/arc_dot_painter.dart';
 
-/// Paints 12 dots of color [color] and size [dotSize] spaced uniformly around the border of a circle with radius [radius]
+/// Paints 12 dots of color `color` and size `dotSize` spaced uniformly around the border of a circle with radius `radius`.
 class ClockFaceRing extends StatelessWidget {
   final double radius;
   final Color color;

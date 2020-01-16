@@ -14,16 +14,16 @@ class TylerHayesClock extends StatelessWidget {
     final double screenSize = MediaQuery.of(context).size.shortestSide;
     
     final double clockFaceRadius = screenSize * .375;
-    final double handsStrokeWidth = screenSize / 30;
+    final double unit = screenSize / 30;
 
     final ClockBody clockBody = ClockBody(
       radius: clockFaceRadius,
       secondHandLength: clockFaceRadius,
-      minuteHandLength: clockFaceRadius - handsStrokeWidth * 3,
-      hourHandLength: clockFaceRadius - handsStrokeWidth * 7,
-      handsStrokeWidth: handsStrokeWidth,
-      clockFaceTickSize: handsStrokeWidth / 2,
-      handsCurveHardness: 2.8,
+      minuteHandLength: clockFaceRadius - unit * 3,
+      hourHandLength: clockFaceRadius - unit * 6,
+      handsStrokeWidth: unit,
+      clockFaceTickSize: unit / 2,
+      handsCurveHardness: unit / 5,
       handsColor: primaryColor(context),
       clockFaceColor: secondaryColor(context),
     );

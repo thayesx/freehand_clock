@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tylerhayes_clock/src/utils/tools.dart';
 
-/// Connects two segments with [strokeWidth] into a single curved stroke. A higher [curveHardness] corresponds to a smaller curve radius. Segment angle is defined from the intersection point.
+/// Connects two segments into a single curved stroke with weight `strokeWidth`.
+///
+/// A higher `curveHardness` corresponds to a smaller curve radius. Segment angle is defined from the intersection point, where 0º is upwards on the y-axis.
 class CurvedAnglePainter extends CustomPainter {
   final double strokeWidth;
   final Color strokeColor;

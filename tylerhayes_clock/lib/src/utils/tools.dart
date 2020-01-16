@@ -1,6 +1,6 @@
 import 'dart:math';
 
-/// Returns a value between -1 and 1 for the y coordinate value of the terminus of a line starting at grid center, with a length of [distanceFromCenter] and angle of [angle]
+/// Returns a value between -1 and 1 for the y coordinate value of the terminus of a line starting at (0, 0), with a length of `distanceFromCenter` and angle of `angle`.
 double radialCoordinateY({
   double distanceFromCenter,
   num angle,
@@ -31,7 +31,7 @@ double radialCoordinateY({
   return distanceFromCenter * multiplier * (angle < 270 && angle > 90 ? 1 : -1);
 }
 
-/// Returns a value between -1 and 1 for the x coordinate value of the terminus of a line starting at grid center, with a length of [distanceFromCenter] and angle of [angle]
+/// Returns a value between -1 and 1 for the x coordinate value of the terminus of a line starting at (0, 0), with a length of `distanceFromCenter` and angle of `angle`.
 double radialCoordinateX({
   double distanceFromCenter,
   num angle,

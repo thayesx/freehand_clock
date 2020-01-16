@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Displays [temperature] in text with fontSize [size] and color [color]
+/// Displays `temperature` in text with fontSize `size` and color `color`.
 class TemperatureText extends StatelessWidget {
   final int temperature;
   final Color color;

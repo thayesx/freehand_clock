@@ -5,7 +5,7 @@ import 'package:tylerhayes_clock/src/utils/constants.dart';
 
 import 'painters/arc_dot_painter.dart';
 
-/// Paints a dot of color [color] and size [dotSize] that orbits a circle with radius [radius].
+/// Animates a dot of color `color` and size `dotSize` that traverses the circumference of a circle with radius `radius` once per minute. Clockwise.
 class SecondHand extends StatefulWidget {
   final double radius;
   final Color color;

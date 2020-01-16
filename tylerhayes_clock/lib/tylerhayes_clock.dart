@@ -12,33 +12,43 @@ class TylerHayesClock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenSize = MediaQuery.of(context).size.shortestSide;
+    
     final double clockFaceRadius = screenSize * .375;
     final double handsStrokeWidth = screenSize / 30;
 
-    final Color handsColor = primaryColor(context);
-    final Color clockFaceColor = secondaryColor(context);
+    final ClockBody clockBody = ClockBody(
+      radius: clockFaceRadius,
+      secondHandLength: clockFaceRadius,
+      minuteHandLength: clockFaceRadius - handsStrokeWidth * 3,
+      hourHandLength: clockFaceRadius - handsStrokeWidth * 7,
+      handsStrokeWidth: handsStrokeWidth,
+      clockFaceTickSize: handsStrokeWidth / 2,
+      handsCurveHardness: 2.8,
+      handsColor: primaryColor(context),
+      clockFaceColor: secondaryColor(context),
+    );
+
+    final double weatherDisplayMargin = screenSize / 20;
+
+    final WeatherDisplay weatherDisplay = WeatherDisplay(
+      temperature: model.temperature,
+      weatherCondition: model.weatherCondition,
+      spacing: weatherDisplayMargin / 2,
+      size: screenSize / 9,
+      color: secondaryColor(context),
+    );
 
     return Scaffold(
       backgroundColor: backgroundColor(context),
       body: Stack(
         children: <Widget>[
           Center(
-            child: ClockBody(
-              radius: clockFaceRadius,
-              secondHandLength: clockFaceRadius,
-              minuteHandLength: clockFaceRadius - handsStrokeWidth * 3,
-              hourHandLength: clockFaceRadius - handsStrokeWidth * 7,
-              handsStrokeWidth: handsStrokeWidth,
-              clockFaceTickSize: handsStrokeWidth / 2,
-              handsCurveHardness: 2.8,
-              handsColor: handsColor,
-              clockFaceColor: clockFaceColor,
-            ),
+            child: clockBody,
           ),
-          WeatherDisplay(
-            temperatureUnit: model.unit,
-            temperature: model.temperature,
-            weatherCondition: model.weatherCondition,
+          Positioned(
+            bottom: weatherDisplayMargin,
+            left: weatherDisplayMargin,
+            child: weatherDisplay,
           )
         ],
       ),

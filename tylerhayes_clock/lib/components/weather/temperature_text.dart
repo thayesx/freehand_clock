@@ -14,8 +14,10 @@ class TemperatureText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String temperatureString = "${temperature.toString()}º";
+
     return Text(
-      "${temperature.toString()}º",
+      temperatureString,
       style: TextStyle(
         fontFamily: "Hands Numeric",
         color: color,

@@ -28,26 +28,32 @@ class ClockBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ClockFaceRing clockFaceRing = ClockFaceRing(
+      radius: radius,
+      dotSize: clockFaceTickSize,
+      color: clockFaceColor,
+    );
+
+    final HourMinuteHands hourMinuteHands = HourMinuteHands(
+      hourHandLength: hourHandLength,
+      minuteHandLength: minuteHandLength,
+      strokeWidth: handsStrokeWidth,
+      curveHardness: handsCurveHardness,
+      color: handsColor,
+    );
+
+    final SecondHand secondHand = SecondHand(
+      radius: secondHandLength,
+      dotSize: handsStrokeWidth,
+      color: handsColor,
+    );
+
     return Stack(
       alignment: AlignmentDirectional.center,
       children: <Widget>[
-        ClockFaceRing(
-          radius: radius,
-          dotSize: clockFaceTickSize,
-          color: clockFaceColor,
-        ),
-        HourMinuteHands(
-          hourHandLength: hourHandLength,
-          minuteHandLength: minuteHandLength,
-          strokeWidth: handsStrokeWidth,
-          curveHardness: handsCurveHardness,
-          color: handsColor,
-        ),
-        SecondHand(
-          radius: secondHandLength,
-          dotSize: handsStrokeWidth,
-          color: handsColor,
-        ),
+        clockFaceRing,
+        hourMinuteHands,
+        secondHand,
       ],
     );
   }

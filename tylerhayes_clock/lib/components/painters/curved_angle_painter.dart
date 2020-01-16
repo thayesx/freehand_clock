@@ -23,33 +23,33 @@ class CurvedAnglePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size _) {
-    final double segment1X = radialCoordinateX(
+    final double segment1CoordX = radialCoordinateX(
       distanceFromCenter: segment1Length,
       angle: segment1Angle,
     );
-    final double segment1Y = radialCoordinateY(
+    final double segment1CoordY = radialCoordinateY(
       distanceFromCenter: segment1Length,
       angle: segment1Angle,
     );
-    final double segment2X = radialCoordinateX(
+    final double segment2CoordX = radialCoordinateX(
       distanceFromCenter: segment2Length,
       angle: segment2Angle,
     );
-    final double segment2Y = radialCoordinateY(
+    final double segment2CoordY = radialCoordinateY(
       distanceFromCenter: segment2Length,
       angle: segment2Angle,
     );
 
     final Path path = Path()
       ..moveTo(
-        segment1X,
-        segment1Y,
+        segment1CoordX,
+        segment1CoordY,
       )
       ..conicTo(
         0,
         0,
-        segment2X,
-        segment2Y,
+        segment2CoordX,
+        segment2CoordY,
         curveHardness,
       );
 

@@ -30,26 +30,26 @@ class WeatherDisplay extends StatelessWidget {
       final EdgeInsetsGeometry padding =
           temperature != null ? EdgeInsets.only(right: spacing) : null;
 
-      children.add(
-        Padding(
-          padding: padding,
-          child: WeatherConditionIcon(
-            weatherCondition: weatherCondition,
-            color: color,
-            size: size,
-          ),
-        ),
-      );
-    }
-
-    if (temperature != null) {
-      children.add(
-        TemperatureText(
-          temperature: temperature.round(),
+      final Widget weatherConditionIcon = Padding(
+        padding: padding,
+        child: WeatherConditionIcon(
+          weatherCondition: weatherCondition,
           color: color,
           size: size,
         ),
       );
+
+      children.add(weatherConditionIcon);
+    }
+
+    if (temperature != null) {
+      final temperatureText = TemperatureText(
+        temperature: temperature.round(),
+        color: color,
+        size: size,
+      );
+
+      children.add(temperatureText);
     }
 
     return Row(

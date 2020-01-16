@@ -43,7 +43,7 @@ class _SecondHandState extends State<SecondHand> {
     final double seconds =
         DateTime.now().second + DateTime.now().millisecond / 1000;
 
-    final secondHandAngle = seconds * degreesPerSecond;
+    final double secondHandAngle = seconds * degreesPerSecond;
 
     return CustomPaint(
       painter: ArcDotPainter(

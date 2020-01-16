@@ -13,7 +13,7 @@ class ClockFaceRing extends StatelessWidget {
     @required this.dotSize,
   });
 
-  final List<double> _tickMarkAngles = [
+  static const List<double> _tickMarkAngles = [
     0,
     30,
     60,

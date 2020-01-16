@@ -33,8 +33,7 @@ class _HourMinuteHandsState extends State<HourMinuteHands> {
   @override
   void initState() {
     _timer = Timer.periodic(
-      // Duration(seconds: 1),
-      Duration(milliseconds: 50),
+      Duration(seconds: 1),
       (_) => setState(() {}),
     );
     super.initState();

@@ -11,11 +11,11 @@ class ClockBody extends StatelessWidget {
 
     final double clockFaceRadius = screenSize * .375;
 
-    final double strokeWidth = screenSize / 30;
-    
+    final double handsStrokeWidth = screenSize / 30;
+
     final double secondHandLength = clockFaceRadius;
-    final double minuteHandLength = clockFaceRadius - strokeWidth * 3;
-    final double hourHandLength = clockFaceRadius - strokeWidth * 7;
+    final double minuteHandLength = clockFaceRadius - handsStrokeWidth * 3;
+    final double hourHandLength = clockFaceRadius - handsStrokeWidth * 7;
 
     return Center(
       child: Stack(
@@ -23,19 +23,19 @@ class ClockBody extends StatelessWidget {
         children: <Widget>[
           ClockFaceRing(
             radius: clockFaceRadius,
-            dotSize: strokeWidth * .5,
+            dotSize: handsStrokeWidth / 2,
             color: secondaryColor(context),
           ),
           HourMinuteHands(
             hourHandLength: hourHandLength,
             minuteHandLength: minuteHandLength,
-            strokeWidth: strokeWidth,
+            strokeWidth: handsStrokeWidth,
             curveHardness: 2.8,
             color: primaryColor(context),
           ),
           SecondHand(
             radius: secondHandLength,
-            dotSize: strokeWidth,
+            dotSize: handsStrokeWidth,
             color: primaryColor(context),
           ),
         ],

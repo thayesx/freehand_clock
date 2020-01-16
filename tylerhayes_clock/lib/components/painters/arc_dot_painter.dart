@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:tylerhayes_clock/utils/tools.dart';
 
-/// For every angle value in [arcAngles], ArcDotPainter paints a dot of color [color] and size [dotSize] along a circle with radius [radius].
+/// For every angle value in [arcAngles], ArcDotPainter paints a dot of color [color] and size [dotSize] at a corresponding point on the border of a circle with radius [radius].
 class ArcDotPainter extends CustomPainter {
   final List<double> arcAngles;
   final double dotSize;
   final Color color;
   final double radius;
-  final StrokeCap strokeCap;
 
   const ArcDotPainter({
     @required this.arcAngles,
     @required this.dotSize,
     @required this.color,
     @required this.radius,
-    this.strokeCap = StrokeCap.round,
   });
 
   @override
@@ -22,7 +20,7 @@ class ArcDotPainter extends CustomPainter {
     final Paint paint = Paint()
       ..strokeWidth = dotSize
       ..color = color
-      ..strokeCap = strokeCap
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
     for (num angle in arcAngles) {

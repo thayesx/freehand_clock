@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:tylerhayes_clock/components/arc_dot_painter.dart';
+import 'package:tylerhayes_clock/components/painters/arc_dot_painter.dart';
 import 'package:tylerhayes_clock/utils/constants.dart';
 
 /// Paints a dot of color [color] and size [dotSize] that orbits a circle with radius [radius].

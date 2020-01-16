@@ -40,13 +40,7 @@ class CurvedAnglePainter extends CustomPainter {
       angle: segment2Angle,
     );
 
-    final Paint paint = Paint()
-      ..strokeWidth = strokeWidth
-      ..color = strokeColor
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
-
-    Path path = Path()
+    final Path path = Path()
       ..moveTo(
         segment1X,
         segment1Y,
@@ -58,6 +52,12 @@ class CurvedAnglePainter extends CustomPainter {
         segment2Y,
         curveHardness,
       );
+
+    final Paint paint = Paint()
+      ..strokeWidth = strokeWidth
+      ..color = strokeColor
+      ..strokeCap = StrokeCap.round
+      ..style = PaintingStyle.stroke;
 
     canvas.drawPath(path, paint);
   }

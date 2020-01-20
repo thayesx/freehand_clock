@@ -19,7 +19,7 @@ class TemperatureText extends StatelessWidget {
     return Text(
       temperatureString,
       style: TextStyle(
-        fontFamily: "Hands Numeric",
+        fontFamily: "Freehand Numeric",
         color: color,
         fontSize: size,
       ),

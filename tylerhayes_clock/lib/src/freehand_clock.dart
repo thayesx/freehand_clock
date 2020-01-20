@@ -4,10 +4,10 @@ import 'package:flutter_clock_helper/model.dart';
 import 'components/index.dart';
 import 'style/colors.dart';
 
-class TylerHayesClock extends StatelessWidget {
+class FreehandClock extends StatelessWidget {
   final ClockModel model;
 
-  TylerHayesClock(this.model);
+  FreehandClock(this.model);
 
   @override
   Widget build(BuildContext context) {

@@ -22,6 +22,6 @@ flutter:
   assets:
     - assets/
   fonts:
-    - family: Hands Numeric
+    - family: Freehand Numeric
       fonts:
-        - asset: fonts/Hands-Numeric.otf
+        - asset: fonts/Freehand-Numeric.otf

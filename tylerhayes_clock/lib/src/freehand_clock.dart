@@ -12,7 +12,7 @@ class FreehandClock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenSize = MediaQuery.of(context).size.shortestSide;
-    
+
     final double clockFaceRadius = screenSize * .375;
     final double unit = screenSize / 30;
 

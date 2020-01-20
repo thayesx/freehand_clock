@@ -6,7 +6,7 @@ import 'package:tylerhayes_clock/src/utils/constants.dart';
 import 'painters/curved_angle_painter.dart';
 
 /// Paints minute and hour clock hands from a single curved stroke of color `color` and width `strokeWidth`.
-/// 
+///
 /// `curveHardness` determines the roundedness of the joint connecting both hands. A higher number corresponds to a harder angle.
 class HourMinuteHands extends StatefulWidget {
   final double hourHandLength;

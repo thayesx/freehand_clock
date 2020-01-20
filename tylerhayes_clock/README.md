@@ -1,7 +1,10 @@
-# Analog Clock
+# Freehand Clock
 
-This app is an example of an analog clock.
-It has a light theme and a dark theme, and displays sample weather and location data.
+Freehand is an analog clockface showing the current time in hours, minutes, and seconds, as well as local temperate and weather condition. It features two monochromatic color schemes (for light and dark mode), a signature, minimalist look and feel based around bold, curved lines, and a proprietary icon library and numeral typeface, 'Freehand Numeric'.
+
+Freehand is currently optimized for display on handheld screen sizes.
+
+Freehand was built for [Flutter Clock Competition](https://flutter.dev/clock) and uses the provided `ClockModel` widget for data on local temperature and weather condition.
 
 <img src='analog.gif' width='350'>
 
